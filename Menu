@@ -1,0 +1,278 @@
+{{velocity}}
+#if(!$hasAdmin)
+{{html clean="false"}}
+<style>
+.document-header{display:none}
+#hierarchy_breadcrumb{display:none}
+</style>
+{{/html}}
+#end
+{{/velocity}}
+
+{{html clean="false"}}
+<style>
+  .menu-section { margin-bottom: 30px; }
+  
+  .menu-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .menu-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .menu-icon.general { background: linear-gradient(135deg, #667eea, #764ba2); }
+  .menu-icon.servicio { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  
+  .menu-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .menu-subtitle {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+  }
+  
+  .customNav {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: visible;
+  }
+  
+  .customNav .nav-item {
+    flex: 1;
+    position: relative;
+  }
+  
+  .customNav .nav-btn {
+    width: 100%;
+    padding: 18px 16px;
+    background: white;
+    border: none;
+    border-right: 1px solid #f0f0f0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  
+  .customNav .nav-item:first-child .nav-btn { border-radius: 12px 0 0 12px; }
+  .customNav .nav-item:last-child .nav-btn { border-right: none; border-radius: 0 12px 12px 0; }
+  
+  .customNav .nav-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  
+  /* Colores sección general */
+  .customNav.general .nav-icon { background: #f0f4ff; color: #667eea; }
+  .customNav.general .nav-item:hover .nav-btn { background: #667eea; color: white; }
+  .customNav.general .nav-item:hover .nav-icon { background: rgba(255,255,255,0.2); color: white; }
+  
+  /* Colores sección servicio */
+  .customNav.servicio .nav-icon { background: #fff0f3; color: #f5576c; }
+  .customNav.servicio .nav-item:hover .nav-btn { background: #f5576c; color: white; }
+  .customNav.servicio .nav-item:hover .nav-icon { background: rgba(255,255,255,0.2); color: white; }
+  
+  .customNav .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 0 0 12px 12px;
+    min-width: 220px;
+    max-height: 320px;
+    overflow-y: auto;
+    z-index: 99999;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  
+  .xwiki-content, #xwikicontent, .main, #mainContentArea {
+    overflow: visible !important;
+  }
+  
+  .customNav .nav-item:hover .dropdown { display: block; }
+  
+  .customNav .dropdown a {
+    display: block;
+    padding: 12px 16px;
+    color: #444;
+    text-decoration: none;
+    font-size: 13px;
+    border-bottom: 1px solid #f8f8f8;
+    transition: all 0.15s;
+  }
+  
+  .customNav .dropdown a:last-child { border-bottom: none; border-radius: 0 0 12px 12px; }
+  .customNav .dropdown a:hover { background: #f8f9ff; color: #667eea; padding-left: 22px; }
+  .customNav.servicio .dropdown a:hover { background: #fff8f9; color: #f5576c; }
+</style>
+
+<!-- SECCIÓN GENÉRICA -->
+<div class="menu-section">
+  <div class="menu-header">
+    <div class="menu-icon general">🏢</div>
+    <div>
+      <div class="menu-title">Recursos Generales</div>
+      <div class="menu-subtitle">Herramientas comunes para todos los departamentos</div>
+    </div>
+  </div>
+  
+  <div class="customNav general">
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">👥</div>
+        <span>RR.HH</span>
+      </div>
+      <div class="dropdown">
+        <a href="/xwiki/bin/view/DashboardJustiziaTest_VGZ/">TimeSquare</a>
+        <a href="/xwiki/bin/view/DashboardJustiziaTest_VGZ/">Control Horario</a>
+        <a href="/xwiki/bin/view/DashboardJustiziaTest_VGZ/">Horas Excedente</a>
+        <a href="#">Vacaciones</a>
+        <a href="#">Justificantes</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">🔧</div>
+        <span>Soporte IT</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Incidencias Informática</a>
+        <a href="#">Peticiones de Equipos</a>
+        <a href="#">Accesos y Permisos</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">📋</div>
+        <span>Normativas</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Políticas de Empresa</a>
+        <a href="#">Prevención de Riesgos</a>
+        <a href="#">Protección de Datos</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">🔗</div>
+        <span>Enlaces</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Directorio Corporativo</a>
+        <a href="#">Intranet</a>
+        <a href="#">Portal del Empleado</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN ESPECÍFICA DEL SERVICIO -->
+<div class="menu-section">
+  <div class="menu-header">
+    <div class="menu-icon servicio">📞</div>
+    <div>
+      <div class="menu-title">Servicio Deitu</div>
+      <div class="menu-subtitle">Recursos específicos del departamento</div>
+    </div>
+  </div>
+  
+  <div class="customNav servicio">
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">📖</div>
+        <span>Procedimientos</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Active Roles</a>
+        <a href="#">Juzgados de Paz</a>
+        <a href="#">Plan de Acogida</a>
+        <a href="#">PSP</a>
+        <a href="#">ZBAT</a>
+        <a href="#">Documentos con Procedimientos</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">💻</div>
+        <span>Aplicaciones</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Avantius</a>
+        <a href="#">Remedy</a>
+        <a href="#">Acceda</a>
+        <a href="#">ARS</a>
+        <a href="#">Cita Previa</a>
+        <a href="#">Dicireg</a>
+        <a href="#">Eizu</a>
+        <a href="#">EJ</a>
+        <a href="#">Epaidigitala</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">📄</div>
+        <span>Documentación</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Manuales</a>
+        <a href="#">Mails Tipo</a>
+        <a href="#">Notas / Excepcionalidades</a>
+        <a href="#">Incidencias Comunes</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <div class="nav-btn">
+        <div class="nav-icon">📞</div>
+        <span>Contactos</span>
+      </div>
+      <div class="dropdown">
+        <a href="#">Contactos Soportes</a>
+        <a href="#">Fórmula de Escalado</a>
+        <a href="#">Escalado Soportes</a>
+        <a href="#">ServiceNow</a>
+        <a href="#">Platea</a>
+        <a href="#">Avisos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/html}}
