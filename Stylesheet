@@ -1,0 +1,197 @@
+{{velocity}}
+#set ($object = $doc.getObject('Plantilla_Creacion.Code.Plantilla_CreacionClass'))
+#if (!$object)
+  #set ($messageKey = 'plantilla_creacion.sheet.description')
+  #set ($messageType = 'info')
+  #if ($doc.documentReference.name != 'Plantilla_CreacionSheet')
+    #set ($messageKey = 'plantilla_creacion.sheet.noObject')
+    #set ($messageType = 'warning')
+  #end
+  {{$messageType}}
+  $services.localization.render($messageKey)
+  {{/$messageType}}
+  #stop
+#end
+#set ($discard = $xwiki.jsfx.use('uicomponents/edit/editableProperty.js', {
+  'forceSkinAction': true,
+  'language': $xcontext.locale
+}))
+#set ($discard = $doc.use($object))
+#set ($editing = $xcontext.action == 'edit')
+{{html wiki="true" clean="false"}}
+<style>
+  .kb-article {
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    color: #333;
+  }
+  
+  .kb-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+  }
+  
+  .kb-header h1 {
+    margin: 0 0 15px 0;
+    font-size: 28px;
+  }
+  
+  .kb-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+  
+  .kb-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .kb-category {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  
+  .kb-section {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+  }
+  
+  .kb-section h2 {
+    color: #667eea;
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .kb-section p, .kb-section li {
+    margin-bottom: 10px;
+  }
+  
+  .kb-steps {
+    background: #f8fafc;
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+    white-space: pre-wrap;
+  }
+  
+  .kb-warning {
+    background: #fef3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px 20px;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .kb-error-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #dc3545;
+  }
+  
+  .kb-example {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    padding: 15px 20px;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .kb-related {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .kb-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .kb-tag {
+    background: #e9ecef;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #495057;
+  }
+  
+  .kb-footer {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+    font-size: 13px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 30px;
+  }
+</style>
+<div class="xform kb-article">
+  <dl>
+    <dd class="kb-header">
+      <h1>$doc.display('Titulo_de_Articulo')</h1>
+      <span class="kb-meta">🕒 $xwiki.formatDate($doc.date, "dd MMM yyyy")</span>
+      <span class="kb-meta">✍️ $xwiki.getUserName($doc.author)</span>
+      <span class="kb-meta">📁 $doc.display('Categoria')</span>
+    </dd>
+
+    <dd class="kb-section">
+    <h2>🎯 Resumen</h2>
+    <p>$doc.display('Resumen')</p>
+    <p><strong>Aplica a:</strong> $doc.display('Aplica_a')</p>
+    </dd>
+
+    <div class="kb-section">
+      <h2>🧩 Contexto</h2>
+        <p>$doc.display('Contexto')</p>
+        <p><strong>Requisitos previos:</strong> $doc.display('Requisitos_Previos')</p>
+    </div>
+
+    <div class="kb-section">
+      <h2>⚙️ Procedimiento</h2>
+      <div class="kb-steps">$doc.display('Procedimiento_Paso_a_Paso')</div>
+    </div>
+
+    <div class="kb-section">
+      <h2>💡 Ejemplo práctico</h2>
+      <div class="kb-example">$doc.display('Ejemplo_Practico')</div>
+    </div>
+
+    <div class="kb-section">
+      <h2>⚠️ Notas importantes</h2>
+      <div class="kb-warning">$doc.display('Notas_Importantes')</div>
+    </div>
+    <div class="kb-section">
+      <h2>🚨 Errores comunes</h2>
+      <div class="kb-error-box">$doc.display('Errores_comunes_y_solucion')</div>
+    </div>
+    <div class="kb-section">
+      <h2>📎 Artículos relacionados</h2>
+      <div class="kb-related">$doc.display('Articulos_relacionados')</div>
+    </div>
+    <dd></dd>
+    <div class="kb-section">
+      <h2>🔍 Palabras clave</h2>
+      <div class="kb-tags">
+          <span class="kb-tag">$doc.display('Palabras_clave')</span>
+      </div>
+    </div>
